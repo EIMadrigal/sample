@@ -32,3 +32,47 @@ if x:
 # compare the reference (memory addr) of x and None (singleton)
 if x is not None:
 ```
+
+
+```python
+import json
+
+try:
+    with open('data.json', 'r', encoding='utf-8') as f:
+        parsed_json = json.load(f)
+    print(type(parsed_json))
+    print(parsed_json)
+except Exception as e:
+    print(f"Error: {e}")
+
+
+
+
+my_dict = {
+    'first_name': 'Guido',
+    'second_name': 'Rossum',
+    'titles': ['BDFL', 'Developer'],
+}
+
+try:
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(my_dict, f)
+except Exception as e:
+    print(f"Error: {e}")
+
+
+
+
+json_str = '{"first_name": "Guido", "last_name":"Rossum"}'
+try:
+    parsed_json = json.loads(json_str)
+    print(parsed_json)
+except Exception as e:
+    print(f"Error: {e}")
+
+
+
+json_str = json.dumps(my_dict)
+print(json_str)
+
+```
