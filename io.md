@@ -40,10 +40,11 @@ import json
 try:
     with open('data.json', 'r', encoding='utf-8') as f:
         parsed_json = json.load(f)
-    print(type(parsed_json))
-    print(parsed_json)
 except Exception as e:
     print(f"Error: {e}")
+else:
+    print(type(parsed_json))
+    print(parsed_json)
 
 
 
@@ -66,9 +67,11 @@ except Exception as e:
 json_str = '{"first_name": "Guido", "last_name":"Rossum"}'
 try:
     parsed_json = json.loads(json_str)
-    print(parsed_json)
 except Exception as e:
     print(f"Error: {e}")
+else:
+    print(parsed_json)
+
 
 
 
