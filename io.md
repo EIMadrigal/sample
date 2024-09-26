@@ -79,3 +79,30 @@ json_str = json.dumps(my_dict)
 print(json_str)
 
 ```
+
+```python
+import requests
+import json
+
+url = 'https://bing.com/api/users'
+
+response = requests.get(url, verify=True, cert=('/path/to/cert.pem', '/path/to/private.key'))
+print(response.status_code)
+
+
+
+headers = {'Content-Type': 'application/json'}
+payload = {'name': 'John', 'mail': 'john@gmail.com'}
+response = requests.post(url, headers=headers, data=payload)
+response = requests.post(url, headers=headers, json=json.dumps(payload))
+
+
+# load json into dict if dealing with JSON data
+try:
+    response_dict = response.json()
+except requests.exceptions.JSONDecodeError as e:
+    print(f'Error: {e}')
+else:
+    print(response_dict)
+
+```
