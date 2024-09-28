@@ -80,6 +80,10 @@ print(json_str)
 
 ```
 
+[How does do client authentication work over https](https://security.stackexchange.com/questions/187694/how-does-do-client-authentication-work-over-https)
+
+[Why must I send certificate and private key when make HTTPS requests](https://security.stackexchange.com/questions/240214/why-must-i-send-certificate-and-private-key-when-make-https-requests)
+
 ```python
 import requests
 import json
