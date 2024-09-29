@@ -110,3 +110,45 @@ else:
     print(response_dict)
 
 ```
+
+
+```python
+from threading import Thread
+import time
+import random
+
+
+# keyword-only argument
+def download(*, filename):
+    start = time.time()
+    print(f'start downloading {filename}')
+    time.sleep(random.randint(3, 6))
+    print(f'finish downloading {filename}')
+    end = time.time()
+    print(f'{filename} download time: {end - start:.3f}s')
+
+
+def main():
+    threads = [
+        Thread(target=download, kwargs={'filename': 'a.txt'}),
+        Thread(target=download, kwargs={'filename': 'b.exe'}),
+        Thread(target=download, kwargs={'filename': 'c.yml'})
+    ]
+    start = time.time()
+    for thread in threads:
+        thread.start()
+    '''
+    thread status is stopped if function finishes, but still exists and joinable
+    https://stackoverflow.com/questions/56163276
+    https://stackoverflow.com/questions/15085348
+    '''
+    for thread in threads:
+        # main thread gets blocked until thread terminates
+        thread.join()
+    end = time.time()
+    print(f'total download time: {end - start:.3f}s')
+
+
+if __name__ == '__main__':
+    main()
+```
