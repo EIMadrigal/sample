@@ -123,9 +123,8 @@ def download(*, filename):
     start = time.time()
     print(f'start downloading {filename}')
     time.sleep(random.randint(3, 6))
-    print(f'finish downloading {filename}')
     end = time.time()
-    print(f'{filename} download time: {end - start:.3f}s')
+    print(f'{filename} download finish, time: {end - start:.3f}s')
 
 
 def main():
