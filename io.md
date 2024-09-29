@@ -191,3 +191,33 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+
+```python
+import time
+import random
+from concurrent.futures import ThreadPoolExecutor
+
+
+def download(*, filename):
+    start = time.time()
+    print(f'start downloading {filename}')
+    time.sleep(random.randint(3, 6))
+    end = time.time()
+    print(f'{filename} download finish, time: {end - start:.3f}s')
+
+
+def main():
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        filenames = ['a.txt', 'b.exe', 'c.yml']
+        start = time.time()
+        for filename in filenames:
+            # non-block, return a handle on the task immediately
+            pool.submit(download, filename=filename)
+    end = time.time()
+    print(f'total download time: {end - start:.3f}s')
+
+
+if __name__ == '__main__':
+    main()
+```
