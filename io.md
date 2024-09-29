@@ -151,3 +151,43 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+```python
+from threading import Thread
+import time
+import random
+
+
+class DownloadThread(Thread):
+
+    def __init__(self, filename):
+        self.filename = filename
+        super().__init__()
+
+    def run(self):
+        start = time.time()
+        print(f'start downloading {self.filename}')
+        time.sleep(random.randint(3, 6))
+        end = time.time()
+        print(f'{self.filename} download finish, time: {end - start:.3f}s')
+
+
+def main():
+    threads = [
+        DownloadThread('a.txt'),
+        DownloadThread('b.exe'),
+        DownloadThread('c.yml')
+    ]
+    start = time.time()
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        # main thread gets blocked until thread terminates
+        thread.join()
+    end = time.time()
+    print(f'total download time: {end - start:.3f}s')
+
+
+if __name__ == '__main__':
+    main()
+```
