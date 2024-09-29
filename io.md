@@ -221,3 +221,30 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+```python
+import time
+from threading import Thread
+
+
+def display(content):
+    while True:
+        print(content, end='', flush=True)
+        time.sleep(0.1)
+
+
+def main():
+    '''
+    The daemon thread will accompany with all non-daemon threads
+    The entire Python program exits when only daemon threads are left
+    https://stackoverflow.com/questions/23285743
+    https://stackoverflow.com/questions/1489669
+    '''
+    Thread(target=display, args=('Ping', )).start()
+    Thread(target=display, args=('Pong', ), daemon=True).start()
+    time.sleep(5)
+
+
+if __name__ == '__main__':
+    main()
+```
