@@ -248,3 +248,35 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+
+```python
+import time
+from threading import RLock
+from concurrent.futures import ThreadPoolExecutor
+
+
+class Account(object):
+
+    def __init__(self):
+        self.balance = 0.0
+        self.lock = RLock()
+
+    def deposit(self, money):
+        with self.lock:
+            new_balance = self.balance + money
+            time.sleep(0.1)
+            self.balance = new_balance
+
+
+def main():
+    account = Account()
+    with ThreadPoolExecutor(max_workers=16) as pool:
+        for _ in range(100):
+            pool.submit(account.deposit, 1)
+    print(account.balance)
+
+
+if __name__ == '__main__':
+    main()
+```
